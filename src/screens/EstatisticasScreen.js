@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+import { View, Text, StyleSheet } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 
 export default function EstatisticasScreen() {
   const [dados, setDados] = useState({
@@ -16,10 +16,10 @@ export default function EstatisticasScreen() {
 
   const carregarDados = async () => {
     try {
-      const salvo = await AsyncStorage.getItem('estatisticas');
+      const salvo = await AsyncStorage.getItem("estatisticas");
       if (salvo) setDados(JSON.parse(salvo));
     } catch (e) {
-      console.log('Erro ao carregar estatísticas:', e);
+      console.log("Erro ao carregar estatísticas:", e);
     }
   };
 
@@ -36,8 +36,8 @@ export default function EstatisticasScreen() {
         <View style={styles.linha}>
           <Ionicons name="help" size={24} color="#333" />
           <Text style={styles.item}>
-            {' '}
-            Perguntas respondidas: {dados.respondidas}{' '}
+            {" "}
+            Perguntas respondidas: {dados.respondidas}{" "}
           </Text>
         </View>
 
@@ -62,36 +62,36 @@ export default function EstatisticasScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FAFAF9",
     flex: 1,
     padding: 20,
   },
 
   titulo: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 28,
     marginBottom: 10,
   },
 
   caixa: {
-    width: '90%',
-    backgroundColor: '#fff',
-    borderColor: '#E4E4E4',
+    width: "90%",
+    backgroundColor: "#fff",
+    borderColor: "#E4E4E4",
     padding: 18,
     borderRadius: 12,
     borderWidth: 1,
   },
 
   linha: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 20,
   },
 
   item: {
-    color: '#333',
+    color: "#333",
     fontSize: 18,
     marginBottom: 10,
   },

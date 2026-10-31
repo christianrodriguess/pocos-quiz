@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, StyleSheet } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import Botao from "../components/Botao";
 
 export default function ResultadoScreen() {
   const navigation = useNavigation();
@@ -20,53 +21,50 @@ export default function ResultadoScreen() {
         </View>
 
         <View style={styles.linha}>
-         <Ionicons name="close" size={24} color="#B42B11" />
-         <Text style={styles.item}> Erros: {erros} </Text>
+          <Ionicons name="close" size={24} color="#B42B11" />
+          <Text style={styles.item}> Erros: {erros} </Text>
         </View>
 
         <View style={styles.linha}>
-         <Ionicons name="cellular" size={24} color="#0078D7" />
-         <Text style={styles.item}> Taxa de acertos: {porcentagem}% </Text>
+          <Ionicons name="cellular" size={24} color="#0078D7" />
+          <Text style={styles.item}> Taxa de acertos: {porcentagem}% </Text>
         </View>
       </View>
 
-      <TouchableOpacity 
-        style={styles.botao} 
-        onPress={() => navigation.navigate("Quiz")}
-      >
-        <Text style={styles.botaoTexto}> Jogar Novamente </Text>
-      </TouchableOpacity>
+      <Botao
+        tipo={"primario"}
+        texto={"Jogar novamente"}
+        acao={() => navigation.navigate("Quiz")}
+      />
 
-      <TouchableOpacity 
-        style={[styles.botao, styles.botaoCinza]} 
-        onPress={() => navigation.navigate("Inicio")}
-      >
-        <Text style={[styles.botaoTexto, { color: '#000' }]}> Voltar ao início </Text>
-      </TouchableOpacity>
-
+      <Botao
+        tipo={"secundario"}
+        texto={"Voltar ao início"}
+        acao={() => navigation.navigate("Inicio")}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FAFAF9",
     flex: 1,
     padding: 20,
   },
 
   titulo: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 28,
     marginBottom: 10,
   },
 
   caixa: {
-    width: '90%',
-    backgroundColor: '#fff',
-    borderColor: '#E4E4E4',
+    width: "90%",
+    backgroundColor: "#fff",
+    borderColor: "#E4E4E4",
     padding: 18,
     borderRadius: 12,
     borderWidth: 1,
@@ -74,31 +72,12 @@ const styles = StyleSheet.create({
   },
 
   linha: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     marginBottom: 20,
   },
 
   item: {
     fontSize: 20,
-  },
-
-  botao: {
-    alignItems: 'center',
-    width: '80%',
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 15,
-    marginBottom: 15,
-  },
-
-  botaoCinza: {
-    backgroundColor: '#ddd',
-  },
-
-  botaoTexto: {
-    color: '#fff',
-    fontWeight: 600,
-    fontSize: 18,
   },
 });
