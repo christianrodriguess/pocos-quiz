@@ -9,7 +9,10 @@ export default function SobreScreen() {
       <View style={styles.caixa}>
         <View style={styles.linha}>
           <Ionicons name="person-outline" size={24} color="#4CAF50" />
-          <Text style={styles.item}> Christian Mateus da Silveira Rodrigues </Text>
+          <Text style={styles.item}>
+            {" "}
+            Christian Mateus da Silveira Rodrigues{" "}
+          </Text>
         </View>
 
         <View style={styles.linha}>
@@ -34,7 +37,10 @@ export default function SobreScreen() {
 
         <View style={styles.linha}>
           <Ionicons name="school-outline" size={24} color="#4CAF50" />
-          <Text style={styles.item}> IFSULDEMINAS - Campus Poços de Caldas </Text>
+          <Text style={styles.item}>
+            {" "}
+            IFSULDEMINAS - Campus Poços de Caldas{" "}
+          </Text>
         </View>
       </View>
     </View>

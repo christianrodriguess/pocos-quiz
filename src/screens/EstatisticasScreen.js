@@ -11,17 +11,16 @@ export default function EstatisticasScreen() {
   });
 
   useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        const salvo = await AsyncStorage.getItem("estatisticas");
+        if (salvo) setDados(JSON.parse(salvo));
+      } catch (e) {
+        console.log("Erro ao carregar estatísticas:", e);
+      }
+    };
     carregarDados();
   }, []);
-
-  const carregarDados = async () => {
-    try {
-      const salvo = await AsyncStorage.getItem("estatisticas");
-      if (salvo) setDados(JSON.parse(salvo));
-    } catch (e) {
-      console.log("Erro ao carregar estatísticas:", e);
-    }
-  };
 
   const porcentagem =
     dados.respondidas > 0

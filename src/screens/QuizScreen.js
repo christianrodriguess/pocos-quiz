@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Botao from "../components/Botao";
 
@@ -9,7 +9,14 @@ import questoesOriginais from "../data/questoes.json";
 export default function QuizScreen() {
   const navigation = useNavigation();
 
-  const [questoes, setQuestoes] = useState([]);
+  const [questoes] = useState(() => {
+    return questoesOriginais
+      .map((q) => ({
+        ...q,
+        opcoes: [...q.opcoes].sort(() => Math.random() - 0.5),
+      }))
+      .sort(() => Math.random() - 0.5);
+  });
   const [questaoAtual, setQuestaoAtual] = useState(0);
 
   const [acertos, setAcertos] = useState(0);
@@ -17,17 +24,6 @@ export default function QuizScreen() {
 
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [respostaCorreta, setRespostaCorreta] = useState(null);
-
-  useEffect(() => {
-    const questoesEmbaralhadas = questoesOriginais
-      .map((q) => ({
-        ...q,
-        opcoes: [...q.opcoes].sort(() => Math.random() - 0.5),
-      }))
-      .sort(() => Math.random() - 0.5);
-
-    setQuestoes(questoesEmbaralhadas);
-  }, []);
 
   const salvarEstatistica = async (acertou) => {
     try {

@@ -13,12 +13,7 @@
 
   {
     "questao": "Poços de Caldas é conhecida principalmente por suas águas...",
-    "opcoes": [
-      "Minerais",
-      "Doceis",
-      "Salgadas",
-      "Termais"
-    ],
+    "opcoes": ["Minerais", "Doceis", "Salgadas", "Termais"],
     "resposta": "Termais",
     "explicacao": "Poços de Caldas é conhecida por suas águas termais — águas naturalmente aquecidas pelo calor interno da Terra. Elas são usadas em banhos terapêuticos, spas e tratamentos de saúde."
   },
@@ -34,15 +29,10 @@
     "resposta": "Getúlio Vargas",
     "explicacao": "O Palace Hotel mantém até hoje uma suíte histórica em homenagem a Getúlio Vargas, que era presença ilustre na cidade."
   },
-  
+
   {
     "questao": "Poços de Caldas foi fundada em...",
-    "opcoes": [
-      "1906",
-      "1922",
-      "1872",
-      "1888"
-    ],
+    "opcoes": ["1906", "1922", "1872", "1888"],
     "resposta": "1872",
     "explicacao": "Poços de Caldas foi fundada em 1872. A cidade começou a se desenvolver graças às águas termais e ao turismo de saúde."
   },
