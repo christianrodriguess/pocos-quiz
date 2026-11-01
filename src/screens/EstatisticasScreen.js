@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
+import Card from "../components/Card";
 
 export default function EstatisticasScreen() {
   const [dados, setDados] = useState({
@@ -31,7 +32,7 @@ export default function EstatisticasScreen() {
     <View style={styles.container}>
       <Text style={styles.titulo}> Suas Estatísticas </Text>
 
-      <View style={styles.caixa}>
+      <Card>
         <View style={styles.linha}>
           <Ionicons name="help" size={24} color="#333" />
           <Text style={styles.item}>
@@ -54,7 +55,7 @@ export default function EstatisticasScreen() {
           <Ionicons name="cellular" size={24} color="#0078D7" />
           <Text style={styles.item}> Taxa de acertos: {porcentagem}% </Text>
         </View>
-      </View>
+      </Card>
     </View>
   );
 }
@@ -74,19 +75,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  caixa: {
-    width: "90%",
-    backgroundColor: "#fff",
-    borderColor: "#E4E4E4",
-    padding: 18,
-    borderRadius: 12,
-    borderWidth: 1,
-  },
-
   linha: {
     alignItems: "center",
     flexDirection: "row",
-    marginBottom: 20,
+    margin: 10,
   },
 
   item: {

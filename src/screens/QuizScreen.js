@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import Botao from "../components/Botao";
+import Card from "../components/Card";
 
 import questoesOriginais from "../data/questoes.json";
 
@@ -80,7 +81,7 @@ export default function QuizScreen() {
       <Text style={styles.questao}> {questoes[questaoAtual].questao} </Text>
 
       {mostrarExplicacao ? (
-        <View style={styles.caixaExplicacao}>
+        <Card style={{ alignItems: "center" }}>
           <Text style={styles.tituloExplicacao}>
             {respostaCorreta ? "✅ Você acertou!" : "❌ Você errou!"}
           </Text>
@@ -97,7 +98,7 @@ export default function QuizScreen() {
               trocarQuestao();
             }}
           />
-        </View>
+        </Card>
       ) : (
         <>
           {questoes[questaoAtual].opcoes.map((opcao, index) => (
