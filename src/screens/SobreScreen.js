@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import Card from "../components/Card";
+import { View, Text, StyleSheet } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Card from '../components/Card';
 
 export default function SobreScreen() {
   return (
@@ -10,9 +10,7 @@ export default function SobreScreen() {
       <Card>
         <View style={styles.linha}>
           <Ionicons name="person-outline" size={24} color="#4CAF50" />
-          <Text style={styles.item}>
-            Christian Mateus da Silveira Rodrigues
-          </Text>
+          <Text style={styles.item}>Christian Mateus da Silveira Rodrigues</Text>
         </View>
 
         <View style={styles.linha}>
@@ -47,26 +45,26 @@ export default function SobreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#FAFAF9",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FAFAF9',
     padding: 20,
   },
 
   titulo: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     fontSize: 28,
     marginBottom: 10,
   },
 
   linha: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: 'center',
+    flexDirection: 'row',
     margin: 10,
   },
 
   item: {
-    color: "#333",
+    color: '#333',
     fontSize: 18,
     marginLeft: 5,
   },

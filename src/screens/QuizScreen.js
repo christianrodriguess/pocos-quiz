@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import Botao from "../components/Botao";
-import Card from "../components/Card";
+import { View, Text, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import Botao from '../components/Botao';
+import Card from '../components/Card';
 
-import questoesOriginais from "../data/questoes.json";
+import questoesOriginais from '../data/questoes.json';
 
 export default function QuizScreen() {
   const navigation = useNavigation();
@@ -28,18 +28,16 @@ export default function QuizScreen() {
 
   const salvarEstatistica = async (acertou) => {
     try {
-      const salvo = await AsyncStorage.getItem("estatisticas");
-      const dados = salvo
-        ? JSON.parse(salvo)
-        : { respondidas: 0, acertos: 0, erros: 0 };
+      const salvo = await AsyncStorage.getItem('estatisticas');
+      const dados = salvo ? JSON.parse(salvo) : { respondidas: 0, acertos: 0, erros: 0 };
 
       dados.respondidas += 1;
       if (acertou) dados.acertos += 1;
       else dados.erros += 1;
 
-      await AsyncStorage.setItem("estatisticas", JSON.stringify(dados));
+      await AsyncStorage.setItem('estatisticas', JSON.stringify(dados));
     } catch (e) {
-      console.log("Erro ao salvar estatísticas:", e);
+      console.log('Erro ao salvar estatísticas:', e);
     }
   };
 
@@ -62,7 +60,7 @@ export default function QuizScreen() {
     if (questaoAtual < questoes.length - 1) {
       setQuestaoAtual(questaoAtual + 1);
     } else {
-      navigation.navigate("Resultado", {
+      navigation.navigate('Resultado', {
         acertos,
         erros,
         total: questoes.length,
@@ -78,21 +76,19 @@ export default function QuizScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.questao}> {questoes[questaoAtual].questao} </Text>
+      <Text style={styles.questao}>{questoes[questaoAtual].questao}</Text>
 
       {mostrarExplicacao ? (
-        <Card style={{ alignItems: "center" }}>
+        <Card style={{ alignItems: 'center' }}>
           <Text style={styles.tituloExplicacao}>
-            {respostaCorreta ? "✅ Você acertou!" : "❌ Você errou!"}
+            {respostaCorreta ? '✅ Você acertou!' : '❌ Você errou!'}
           </Text>
 
-          <Text style={styles.textoExplicacao}>
-            {questoes[questaoAtual].explicacao}
-          </Text>
+          <Text style={styles.textoExplicacao}>{questoes[questaoAtual].explicacao}</Text>
 
           <Botao
-            tipo={"primario"}
-            texto={"Próxima"}
+            tipo={'primario'}
+            texto={'Próxima'}
             acao={() => {
               setMostrarExplicacao(false);
               trocarQuestao();
@@ -104,7 +100,7 @@ export default function QuizScreen() {
           {questoes[questaoAtual].opcoes.map((opcao, index) => (
             <Botao
               key={index}
-              tipo={"secundario"}
+              tipo={'secundario'}
               texto={opcao}
               acao={() => verificarResposta(opcao)}
             />
@@ -121,32 +117,32 @@ export default function QuizScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FAFAF9",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FAFAF9',
     flex: 1,
     padding: 20,
   },
 
   questao: {
-    textAlign: "center",
-    fontWeight: "600",
+    textAlign: 'center',
+    fontWeight: '600',
     fontSize: 20,
     marginBottom: 25,
   },
 
   texto: {
-    textAlign: "center",
-    color: "#666",
+    textAlign: 'center',
+    color: '#666',
     marginTop: 30,
     fontSize: 14,
   },
 
   caixaExplicacao: {
-    width: "100%",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    borderColor: "#E4E4E4",
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderColor: '#E4E4E4',
     padding: 20,
     borderWidth: 1,
     borderRadius: 12,
@@ -154,14 +150,14 @@ const styles = StyleSheet.create({
   },
 
   tituloExplicacao: {
-    textAlign: "center",
-    fontWeight: "600",
+    textAlign: 'center',
+    fontWeight: '600',
     fontSize: 22,
     marginBottom: 10,
   },
 
   textoExplicacao: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 16,
     marginBottom: 20,
   },

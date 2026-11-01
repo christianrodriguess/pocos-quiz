@@ -1,4 +1,3 @@
-/** @type {import('prettier').Config} */
 module.exports = {
     singleQuote: true,
     jsxSingleQuote: false,
@@ -8,5 +7,5 @@ module.exports = {
     trailingComma: 'all',
     bracketSpacing: true,
     arrowParens: 'always',
-    endOfLine: 'crlf',
+    endOfLine: 'lf',
 };
