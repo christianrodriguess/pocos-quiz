@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import Card from '../components/Card';
+import Titulo from '../components/Titulo';
 
 export default function SobreScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Sobre nós</Text>
+      <Titulo>Sobre nós</Titulo>
 
       <Card>
         <View style={styles.linha}>
@@ -49,12 +51,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FAFAF9',
     padding: 20,
-  },
-
-  titulo: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    marginBottom: 10,
   },
 
   linha: {

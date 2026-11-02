@@ -1,12 +1,7 @@
 [
   {
     "questao": "Qual é o famoso ponto turístico de Poços de Caldas conhecido por sua vista panorâmica?",
-    "opcoes": [
-      "Cristo Redentor",
-      "Recanto Japonês",
-      "Fonte dos Amores",
-      "Relógio Floral"
-    ],
+    "opcoes": ["Cristo Redentor", "Recanto Japonês", "Fonte dos Amores", "Relógio Floral"],
     "resposta": "Cristo Redentor",
     "explicacao": "O Cristo Redentor de Poços de Caldas fica no alto da Serra de São Domingos e oferece uma das vistas mais altas da cidade."
   },
@@ -20,12 +15,7 @@
 
   {
     "questao": "Qual desses nomes havia uma suíte especial no Palace Hotel?",
-    "opcoes": [
-      "Juscelino Kubitschek",
-      "Getúlio Vargas",
-      "Dom Pedro I",
-      "Dom Pedro II"
-    ],
+    "opcoes": ["Juscelino Kubitschek", "Getúlio Vargas", "Dom Pedro I", "Dom Pedro II"],
     "resposta": "Getúlio Vargas",
     "explicacao": "O Palace Hotel mantém até hoje uma suíte histórica em homenagem a Getúlio Vargas, que era presença ilustre na cidade."
   },
@@ -99,12 +89,7 @@
 
   {
     "questao": "Além do turismo hidromineral, Poços de Caldas se destaca economicamente pela produção de qual item artesanal, com fábricas famosas instaladas pela cidade?",
-    "opcoes": [
-      "Queijos artesanais",
-      "Cristais finos",
-      "Calçados de couro",
-      "Café especial"
-    ],
+    "opcoes": ["Queijos artesanais", "Cristais finos", "Calçados de couro", "Café especial"],
     "resposta": "Cristais finos",
     "explicacao": "A produção de cristais é uma atividade econômica e artesanal de grande destaque em Poços de Caldas, a cidade abriga fábricas tradicionais, como a Cristais São Marcos e a Cristais Cá d'Oro."
   }

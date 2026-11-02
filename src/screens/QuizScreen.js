@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import Botao from '../components/Botao';
 import Card from '../components/Card';
 

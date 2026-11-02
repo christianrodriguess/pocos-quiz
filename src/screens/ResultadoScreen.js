@@ -1,8 +1,10 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation, useRoute } from '@react-navigation/native';
+
 import Botao from '../components/Botao';
 import Card from '../components/Card';
+import Titulo from '../components/Titulo';
 
 export default function ResultadoScreen() {
   const navigation = useNavigation();
@@ -13,7 +15,7 @@ export default function ResultadoScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Quiz Finalizado!</Text>
+      <Titulo>Quiz Finalizado!</Titulo>
 
       <Card>
         <View style={styles.linha}>
@@ -50,12 +52,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAF9',
     flex: 1,
     padding: 20,
-  },
-
-  titulo: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    marginBottom: 10,
   },
 
   linha: {

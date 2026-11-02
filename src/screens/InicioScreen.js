@@ -1,7 +1,7 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Botao from '../components/Botao';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
+import Botao from '../components/Botao';
 import brasao from '../../assets/brasao-pocos.png';
 
 export default function InicioScreen() {

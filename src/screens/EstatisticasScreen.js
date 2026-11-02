@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState } from 'react';
+
 import Card from '../components/Card';
+import Titulo from '../components/Titulo';
 
 export default function EstatisticasScreen() {
   const [dados, setDados] = useState({
@@ -28,7 +30,7 @@ export default function EstatisticasScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Suas Estatísticas</Text>
+      <Titulo>Suas Estatísticas</Titulo>
 
       <Card>
         <View style={styles.linha}>
@@ -62,12 +64,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAFAF9',
     flex: 1,
     padding: 20,
-  },
-
-  titulo: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    marginBottom: 10,
   },
 
   linha: {

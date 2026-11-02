@@ -6,11 +6,11 @@ const variantes = {
   secundario: { fundo: cores.cinza, texto: cores.preto },
 };
 
-export default function Botao({ tipo = 'primario', texto, acao }) {
+export default function Botao({ tipo = 'primario', texto, acao, style }) {
   const { fundo, texto: corTexto } = variantes[tipo];
 
   return (
-    <TouchableOpacity style={[styles.botao, { backgroundColor: fundo }]} onPress={acao}>
+    <TouchableOpacity style={[styles.botao, { backgroundColor: fundo }, style]} onPress={acao}>
       <Text style={[styles.texto, { color: corTexto }]}>{texto}</Text>
     </TouchableOpacity>
   );
