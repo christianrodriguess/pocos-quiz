@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Container from '../components/Container';
 import Card from '../components/Card';
 import Titulo from '../components/Titulo';
 
@@ -29,7 +30,7 @@ export default function EstatisticasScreen() {
     dados.respondidas > 0 ? ((dados.acertos / dados.respondidas) * 100).toFixed(1) : 0;
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Titulo>Suas Estatísticas</Titulo>
 
       <Card>
@@ -53,19 +54,11 @@ export default function EstatisticasScreen() {
           <Text style={styles.item}>Taxa de acertos: {porcentagem}%</Text>
         </View>
       </Card>
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
-    flex: 1,
-    padding: 20,
-  },
-
   linha: {
     alignItems: 'center',
     flexDirection: 'row',

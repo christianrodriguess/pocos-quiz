@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Container from '../components/Container';
 import Botao from '../components/Botao';
 import Card from '../components/Card';
 
@@ -76,7 +77,7 @@ export default function QuizScreen() {
   if (questoes.length === 0) return null;
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Text style={styles.questao}>{questoes[questaoAtual].questao}</Text>
 
       {mostrarExplicacao ? (
@@ -112,19 +113,11 @@ export default function QuizScreen() {
       <Text style={styles.texto}>
         Pergunta {questaoAtual + 1} de {questoes.length}
       </Text>
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FAFAF9',
-    flex: 1,
-    padding: 20,
-  },
-
   questao: {
     textAlign: 'center',
     fontWeight: '600',

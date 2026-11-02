@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { Text, Image, StyleSheet } from 'react-native';
 
+import Container from '../components/Container';
 import Botao from '../components/Botao';
 import brasao from '../../assets/brasao-pocos.png';
 
@@ -8,7 +9,7 @@ export default function InicioScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Image source={brasao} resizeMode="contain" style={styles.logo} />
       <Text style={styles.titulo}>Poços Quiz</Text>
 
@@ -19,19 +20,11 @@ export default function InicioScreen() {
         acao={() => navigation.navigate('Estatisticas')}
       />
       <Botao tipo={'secundario'} texto={'Sobre'} acao={() => navigation.navigate('Sobre')} />
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
-    flex: 1,
-    padding: 20,
-  },
-
   logo: {
     aspectRatio: 1,
     height: 200,

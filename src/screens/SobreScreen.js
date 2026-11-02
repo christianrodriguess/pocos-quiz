@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+import Container from '../components/Container';
 import Card from '../components/Card';
 import Titulo from '../components/Titulo';
 
 export default function SobreScreen() {
   return (
-    <View style={styles.container}>
+    <Container>
       <Titulo>Sobre nós</Titulo>
 
       <Card>
@@ -40,19 +41,11 @@ export default function SobreScreen() {
           <Text style={styles.item}>IFSULDEMINAS - Campus Poços de Caldas</Text>
         </View>
       </Card>
-    </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
-    padding: 20,
-  },
-
   linha: {
     alignItems: 'center',
     flexDirection: 'row',
