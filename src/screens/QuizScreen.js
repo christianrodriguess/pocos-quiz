@@ -90,22 +90,20 @@ export default function QuizScreen() {
 
           <Botao
             tipo={'primario'}
-            texto={'Próxima'}
             acao={() => {
               setMostrarExplicacao(false);
               trocarQuestao();
             }}
-          />
+          >
+            Próxima
+          </Botao>
         </Card>
       ) : (
         <>
           {questoes[questaoAtual].opcoes.map((opcao, index) => (
-            <Botao
-              key={index}
-              tipo={'secundario'}
-              texto={opcao}
-              acao={() => verificarResposta(opcao)}
-            />
+            <Botao key={index} tipo={'secundario'} acao={() => verificarResposta(opcao)}>
+              {opcao}
+            </Botao>
           ))}
         </>
       )}

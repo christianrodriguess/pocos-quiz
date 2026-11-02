@@ -13,13 +13,15 @@ export default function InicioScreen() {
       <Image source={brasao} resizeMode="contain" style={styles.logo} />
       <Text style={styles.titulo}>Poços Quiz</Text>
 
-      <Botao tipo={'primario'} texto={'Iniciar Quiz'} acao={() => navigation.navigate('Quiz')} />
-      <Botao
-        tipo={'secundario'}
-        texto={'Estatísticas'}
-        acao={() => navigation.navigate('Estatisticas')}
-      />
-      <Botao tipo={'secundario'} texto={'Sobre'} acao={() => navigation.navigate('Sobre')} />
+      <Botao tipo={'primario'} acao={() => navigation.navigate('Quiz')}>
+        Iniciar Quiz
+      </Botao>
+      <Botao tipo={'secundario'} acao={() => navigation.navigate('Estatisticas')}>
+        Estatísticas
+      </Botao>
+      <Botao tipo={'secundario'} acao={() => navigation.navigate('Sobre')}>
+        Sobre
+      </Botao>
     </Container>
   );
 }

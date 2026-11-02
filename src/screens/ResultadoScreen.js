@@ -35,13 +35,13 @@ export default function ResultadoScreen() {
         </View>
       </Card>
 
-      <Botao tipo={'primario'} texto={'Jogar novamente'} acao={() => navigation.navigate('Quiz')} />
+      <Botao tipo={'primario'} acao={() => navigation.navigate('Quiz')}>
+        Jogar novamente
+      </Botao>
 
-      <Botao
-        tipo={'secundario'}
-        texto={'Voltar ao início'}
-        acao={() => navigation.navigate('Inicio')}
-      />
+      <Botao tipo={'secundario'} acao={() => navigation.navigate('Inicio')}>
+        Voltar ao início
+      </Botao>
     </Container>
   );
 }
