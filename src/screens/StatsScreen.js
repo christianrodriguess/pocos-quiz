@@ -9,9 +9,9 @@ import Title from '../components/Title';
 
 export default function StatsScreen() {
   const [stats, setStats] = useState({
-    answered: 0,
-    correctAnswers: 0,
-    wrongAnswers: 0,
+    totalQuestions: 0,
+    correctAnswersCount: 0,
+    wrongAnswersCount: 0,
   });
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function StatsScreen() {
   }, []);
 
   const accuracyPercentage =
-    stats.answered > 0 ? ((stats.correctAnswers / stats.answered) * 100).toFixed(1) : 0;
+    stats.totalQuestions > 0 ? ((stats.correctAnswersCount / stats.totalQuestions) * 100).toFixed(1) : 0;
 
   return (
     <Container>
@@ -36,17 +36,17 @@ export default function StatsScreen() {
       <Card>
         <View style={styles.line}>
           <Ionicons name="help" size={24} color="#333" />
-          <Text style={styles.item}>Perguntas respondidas: {stats.answered}</Text>
+          <Text style={styles.item}>Perguntas respondidas: {stats.totalQuestions}</Text>
         </View>
 
         <View style={styles.line}>
           <Ionicons name="checkmark" size={24} color="#16C60C" />
-          <Text style={styles.item}>Acertos: {stats.correctAnswers}</Text>
+          <Text style={styles.item}>Acertos: {stats.correctAnswersCount}</Text>
         </View>
 
         <View style={styles.line}>
           <Ionicons name="close" size={24} color="#B42B11" />
-          <Text style={styles.item}>Erros: {stats.wrongAnswers}</Text>
+          <Text style={styles.item}>Erros: {stats.wrongAnswersCount}</Text>
         </View>
 
         <View style={styles.line}>

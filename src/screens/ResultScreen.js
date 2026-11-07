@@ -11,8 +11,9 @@ export default function ResultScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { correctAnswersCount, wrongAnswersCount, totalQuestions } = route.params;
-  const accuracyPercentage = ((correctAnswersCount / totalQuestions) * 100).toFixed(1);
+  const { totalQuestions, correctAnswersCount, wrongAnswersCount } = route.params;
+  const accuracyPercentage =
+    totalQuestions > 0 ? ((correctAnswersCount / totalQuestions) * 100).toFixed(1) : 0;
 
   return (
     <Container>

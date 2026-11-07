@@ -9,33 +9,40 @@ import Card from '../components/Card';
 
 import initialQuestions from '../data/questions.json';
 
+function fisherYates(array) {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 export default function QuizScreen() {
   const navigation = useNavigation();
 
-  const [shuffledQuestions] = useState(() => {
-    return initialQuestions
-      .map((question) => ({
-        ...question,
-        options: [...question.options].sort(() => Math.random() - 0.5),
-      }))
-      .sort(() => Math.random() - 0.5);
-  });
+  const [shuffledQuestions] = useState(() =>
+    fisherYates(initialQuestions).map((question) => ({
+      ...question,
+      options: fisherYates(question.options),
+    })),
+  );
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [wrongAnswersCount, setWrongAnswersCount] = useState(0);
 
   const [isExplanationVisible, setExplanationVisible] = useState(false);
-  const [isAnswerCorrect, setCorrectAnswer] = useState(null);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
   const saveStats = async (isCorrect) => {
     try {
       const savedStats = await AsyncStorage.getItem('stats');
       const stats = savedStats
         ? JSON.parse(savedStats)
-        : { answered: 0, correctAnswersCount: 0, wrongAnswersCount: 0 };
+        : { totalQuestions: 0, correctAnswersCount: 0, wrongAnswersCount: 0 };
 
-      stats.answered += 1;
+      stats.totalQuestions += 1;
       if (isCorrect) stats.correctAnswersCount += 1;
       else stats.wrongAnswersCount += 1;
 
@@ -48,7 +55,7 @@ export default function QuizScreen() {
   const checkAnswer = (option) => {
     const isCorrect = shuffledQuestions[currentQuestionIndex].answer === option;
 
-    setCorrectAnswer(isCorrect);
+    setIsAnswerCorrect(isCorrect);
     setExplanationVisible(true);
 
     const newCorrectAnswers = isCorrect ? correctAnswersCount + 1 : correctAnswersCount;
@@ -65,9 +72,9 @@ export default function QuizScreen() {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       navigation.navigate('Resultado', {
+        totalQuestions: shuffledQuestions.length,
         correctAnswersCount,
         wrongAnswersCount,
-        totalQuestions: shuffledQuestions.length,
       });
 
       setCorrectAnswersCount(0);
@@ -84,14 +91,11 @@ export default function QuizScreen() {
 
       {isExplanationVisible ? (
         <Card style={{ alignItems: 'center' }}>
-          <Text style={styles.explanationTitle}>
-            {isAnswerCorrect ? '✅ Você acertou!' : '❌ Você errou!'}
-          </Text>
-
           {isAnswerCorrect ? (
-            <></>
+            <Text style={styles.explanationTitle}>✅ Você acertou!</Text>
           ) : (
             <>
+              <Text style={styles.explanationTitle}>❌ Você errou!</Text>
               <Text style={styles.correctAnswer}>Resposta Correta:</Text>
               <Text style={[styles.explanationText, { fontWeight: '600' }]}>
                 {shuffledQuestions[currentQuestionIndex].answer}
@@ -115,8 +119,8 @@ export default function QuizScreen() {
         </Card>
       ) : (
         <>
-          {shuffledQuestions[currentQuestionIndex].options.map((option, index) => (
-            <Button key={index} variant={'secondary'} onPress={() => checkAnswer(option)}>
+          {shuffledQuestions[currentQuestionIndex].options.map((option) => (
+            <Button key={option} variant={'secondary'} onPress={() => checkAnswer(option)}>
               {option}
             </Button>
           ))}
