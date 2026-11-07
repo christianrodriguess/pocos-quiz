@@ -1,6 +1,6 @@
-export const cores = {
-  verde: '#4CAF50',
-  cinza: '#E0E0E0',
-  branco: '#FFF',
-  preto: '#000',
+export const colors = {
+  green: '#4CAF50',
+  gray: '#E0E0E0',
+  white: '#FFF',
+  black: '#000',
 };

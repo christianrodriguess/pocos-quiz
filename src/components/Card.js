@@ -7,7 +7,7 @@ export default function Card({ children, style }) {
 const styles = StyleSheet.create({
   card: {
     width: '90%',
-    alignItems: 'start',
+    alignItems: 'flex-start',
     backgroundColor: '#FFF',
     padding: 20,
     borderWidth: 1,

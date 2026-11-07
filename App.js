@@ -1,10 +1,10 @@
 import { View, StatusBar } from 'react-native';
-import Main from './src/navigation/index';
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <Main />
+      <AppNavigator />
       <StatusBar barStyle="default" />
     </View>
   );

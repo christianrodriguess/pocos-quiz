@@ -4,153 +4,165 @@ import { Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Container from '../components/Container';
-import Botao from '../components/Botao';
+import Button from '../components/Button';
 import Card from '../components/Card';
 
-import questoesOriginais from '../data/questoes.json';
+import initialQuestions from '../data/questions.json';
 
 export default function QuizScreen() {
   const navigation = useNavigation();
 
-  const [questoes] = useState(() => {
-    return questoesOriginais
-      .map((q) => ({
-        ...q,
-        opcoes: [...q.opcoes].sort(() => Math.random() - 0.5),
+  const [shuffledQuestions] = useState(() => {
+    return initialQuestions
+      .map((question) => ({
+        ...question,
+        options: [...question.options].sort(() => Math.random() - 0.5),
       }))
       .sort(() => Math.random() - 0.5);
   });
-  const [questaoAtual, setQuestaoAtual] = useState(0);
 
-  const [acertos, setAcertos] = useState(0);
-  const [erros, setErros] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [wrongAnswersCount, setWrongAnswersCount] = useState(0);
 
-  const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
-  const [respostaCorreta, setRespostaCorreta] = useState(null);
+  const [isExplanationVisible, setExplanationVisible] = useState(false);
+  const [isAnswerCorrect, setCorrectAnswer] = useState(null);
 
-  const salvarEstatistica = async (acertou) => {
+  const saveStats = async (isCorrect) => {
     try {
-      const salvo = await AsyncStorage.getItem('estatisticas');
-      const dados = salvo ? JSON.parse(salvo) : { respondidas: 0, acertos: 0, erros: 0 };
+      const savedStats = await AsyncStorage.getItem('stats');
+      const stats = savedStats
+        ? JSON.parse(savedStats)
+        : { answered: 0, correctAnswersCount: 0, wrongAnswersCount: 0 };
 
-      dados.respondidas += 1;
-      if (acertou) dados.acertos += 1;
-      else dados.erros += 1;
+      stats.answered += 1;
+      if (isCorrect) stats.correctAnswersCount += 1;
+      else stats.wrongAnswersCount += 1;
 
-      await AsyncStorage.setItem('estatisticas', JSON.stringify(dados));
+      await AsyncStorage.setItem('stats', JSON.stringify(stats));
     } catch (e) {
       console.log('Erro ao salvar estatísticas:', e);
     }
   };
 
-  const verificarResposta = (opcao) => {
-    const correta = questoes[questaoAtual].resposta === opcao;
+  const checkAnswer = (option) => {
+    const isCorrect = shuffledQuestions[currentQuestionIndex].answer === option;
 
-    setRespostaCorreta(correta);
-    setMostrarExplicacao(true);
+    setCorrectAnswer(isCorrect);
+    setExplanationVisible(true);
 
-    const novosAcertos = correta ? acertos + 1 : acertos;
-    const novosErros = !correta ? erros + 1 : erros;
+    const newCorrectAnswers = isCorrect ? correctAnswersCount + 1 : correctAnswersCount;
+    const newWrongAnswers = !isCorrect ? wrongAnswersCount + 1 : wrongAnswersCount;
 
-    setAcertos(novosAcertos);
-    setErros(novosErros);
+    setCorrectAnswersCount(newCorrectAnswers);
+    setWrongAnswersCount(newWrongAnswers);
 
-    salvarEstatistica(correta);
+    saveStats(isCorrect);
   };
 
-  const trocarQuestao = () => {
-    if (questaoAtual < questoes.length - 1) {
-      setQuestaoAtual(questaoAtual + 1);
+  const goToNextQuestion = () => {
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       navigation.navigate('Resultado', {
-        acertos,
-        erros,
-        total: questoes.length,
+        correctAnswersCount,
+        wrongAnswersCount,
+        totalQuestions: shuffledQuestions.length,
       });
 
-      setAcertos(0);
-      setErros(0);
-      setQuestaoAtual(0);
+      setCorrectAnswersCount(0);
+      setWrongAnswersCount(0);
+      setCurrentQuestionIndex(0);
     }
   };
 
-  if (questoes.length === 0) return null;
+  if (shuffledQuestions.length === 0) return null;
 
   return (
     <Container>
-      <Text style={styles.questao}>{questoes[questaoAtual].questao}</Text>
+      <Text style={styles.question}>{shuffledQuestions[currentQuestionIndex].question}</Text>
 
-      {mostrarExplicacao ? (
+      {isExplanationVisible ? (
         <Card style={{ alignItems: 'center' }}>
-          <Text style={styles.tituloExplicacao}>
-            {respostaCorreta ? '✅ Você acertou!' : '❌ Você errou!'}
+          <Text style={styles.explanationTitle}>
+            {isAnswerCorrect ? '✅ Você acertou!' : '❌ Você errou!'}
           </Text>
 
-          <Text style={styles.textoExplicacao}>{questoes[questaoAtual].explicacao}</Text>
+          {isAnswerCorrect ? (
+            <></>
+          ) : (
+            <>
+              <Text style={styles.correctAnswer}>Resposta Correta:</Text>
+              <Text style={[styles.explanationText, { fontWeight: '600' }]}>
+                {shuffledQuestions[currentQuestionIndex].answer}
+              </Text>
+            </>
+          )}
 
-          <Botao
-            tipo={'primario'}
-            acao={() => {
-              setMostrarExplicacao(false);
-              trocarQuestao();
+          <Text style={styles.explanationText}>
+            {shuffledQuestions[currentQuestionIndex].explanation}
+          </Text>
+
+          <Button
+            variant={'primary'}
+            onPress={() => {
+              setExplanationVisible(false);
+              goToNextQuestion();
             }}
           >
             Próxima
-          </Botao>
+          </Button>
         </Card>
       ) : (
         <>
-          {questoes[questaoAtual].opcoes.map((opcao, index) => (
-            <Botao key={index} tipo={'secundario'} acao={() => verificarResposta(opcao)}>
-              {opcao}
-            </Botao>
+          {shuffledQuestions[currentQuestionIndex].options.map((option, index) => (
+            <Button key={index} variant={'secondary'} onPress={() => checkAnswer(option)}>
+              {option}
+            </Button>
           ))}
         </>
       )}
 
-      <Text style={styles.texto}>
-        Pergunta {questaoAtual + 1} de {questoes.length}
+      <Text style={styles.caption}>
+        Pergunta {currentQuestionIndex + 1} de {shuffledQuestions.length}
       </Text>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  questao: {
+  question: {
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 20,
     marginBottom: 25,
   },
 
-  texto: {
+  caption: {
     textAlign: 'center',
     color: '#666',
-    marginTop: 30,
-    fontSize: 14,
+    fontSize: 12,
   },
 
-  caixaExplicacao: {
-    width: '100%',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderColor: '#E4E4E4',
-    padding: 20,
-    borderWidth: 1,
-    borderRadius: 12,
-    marginTop: 20,
-  },
-
-  tituloExplicacao: {
+  explanationTitle: {
     textAlign: 'center',
     fontWeight: '600',
-    fontSize: 22,
+    fontSize: 20,
     marginBottom: 10,
   },
 
-  textoExplicacao: {
-    textAlign: 'center',
+  explanationText: {
     fontSize: 16,
-    marginBottom: 20,
+    lineHeight: 24,
+    marginBottom: 10,
+  },
+
+  correctAnswer: {
+    fontSize: 16,
+    fontWeight: '600',
+    padding: 2,
+    borderRadius: 5,
+    color: '#137333',
+    backgroundColor: '#D1E7DD',
   },
 });

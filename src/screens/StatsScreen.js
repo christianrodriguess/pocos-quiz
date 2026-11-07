@@ -5,53 +5,53 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Container from '../components/Container';
 import Card from '../components/Card';
-import Titulo from '../components/Titulo';
+import Title from '../components/Title';
 
-export default function EstatisticasScreen() {
-  const [dados, setDados] = useState({
-    respondidas: 0,
-    acertos: 0,
-    erros: 0,
+export default function StatsScreen() {
+  const [stats, setStats] = useState({
+    answered: 0,
+    correctAnswers: 0,
+    wrongAnswers: 0,
   });
 
   useEffect(() => {
-    const carregarDados = async () => {
+    const loadStats = async () => {
       try {
-        const salvo = await AsyncStorage.getItem('estatisticas');
-        if (salvo) setDados(JSON.parse(salvo));
+        const savedStats = await AsyncStorage.getItem('stats');
+        if (savedStats) setStats(JSON.parse(savedStats));
       } catch (e) {
         console.log('Erro ao carregar estatísticas:', e);
       }
     };
-    carregarDados();
+    loadStats();
   }, []);
 
-  const porcentagem =
-    dados.respondidas > 0 ? ((dados.acertos / dados.respondidas) * 100).toFixed(1) : 0;
+  const accuracyPercentage =
+    stats.answered > 0 ? ((stats.correctAnswers / stats.answered) * 100).toFixed(1) : 0;
 
   return (
     <Container>
-      <Titulo>Suas Estatísticas</Titulo>
+      <Title>Suas Estatísticas</Title>
 
       <Card>
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="help" size={24} color="#333" />
-          <Text style={styles.item}>Perguntas respondidas: {dados.respondidas}</Text>
+          <Text style={styles.item}>Perguntas respondidas: {stats.answered}</Text>
         </View>
 
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="checkmark" size={24} color="#16C60C" />
-          <Text style={styles.item}>Acertos: {dados.acertos}</Text>
+          <Text style={styles.item}>Acertos: {stats.correctAnswers}</Text>
         </View>
 
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="close" size={24} color="#B42B11" />
-          <Text style={styles.item}>Erros: {dados.erros}</Text>
+          <Text style={styles.item}>Erros: {stats.wrongAnswers}</Text>
         </View>
 
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="cellular" size={24} color="#0078D7" />
-          <Text style={styles.item}>Taxa de acertos: {porcentagem}%</Text>
+          <Text style={styles.item}>Taxa de acertos: {accuracyPercentage}%</Text>
         </View>
       </Card>
     </Container>
@@ -59,7 +59,7 @@ export default function EstatisticasScreen() {
 }
 
 const styles = StyleSheet.create({
-  linha: {
+  line: {
     alignItems: 'center',
     flexDirection: 'row',
     margin: 10,

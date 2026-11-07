@@ -3,51 +3,51 @@ import { View, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Container from '../components/Container';
-import Botao from '../components/Botao';
+import Button from '../components/Button';
 import Card from '../components/Card';
-import Titulo from '../components/Titulo';
+import Title from '../components/Title';
 
-export default function ResultadoScreen() {
+export default function ResultScreen() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { acertos, erros, total } = route.params;
-  const porcentagem = ((acertos / total) * 100).toFixed(1);
+  const { correctAnswersCount, wrongAnswersCount, totalQuestions } = route.params;
+  const accuracyPercentage = ((correctAnswersCount / totalQuestions) * 100).toFixed(1);
 
   return (
     <Container>
-      <Titulo>Quiz Finalizado!</Titulo>
+      <Title>Quiz Finalizado!</Title>
 
       <Card>
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="checkmark" size={24} color="#16C60C" />
-          <Text style={styles.item}>Acertos: {acertos}</Text>
+          <Text style={styles.item}>Acertos: {correctAnswersCount}</Text>
         </View>
 
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="close" size={24} color="#B42B11" />
-          <Text style={styles.item}>Erros: {erros}</Text>
+          <Text style={styles.item}>Erros: {wrongAnswersCount}</Text>
         </View>
 
-        <View style={styles.linha}>
+        <View style={styles.line}>
           <Ionicons name="cellular" size={24} color="#0078D7" />
-          <Text style={styles.item}>Taxa de acertos: {porcentagem}%</Text>
+          <Text style={styles.item}>Taxa de acertos: {accuracyPercentage}%</Text>
         </View>
       </Card>
 
-      <Botao tipo={'primario'} acao={() => navigation.navigate('Quiz')}>
+      <Button variant={'primary'} onPress={() => navigation.navigate('Quiz')}>
         Jogar novamente
-      </Botao>
+      </Button>
 
-      <Botao tipo={'secundario'} acao={() => navigation.navigate('Inicio')}>
+      <Button variant={'secondary'} onPress={() => navigation.navigate('Inicio')}>
         Voltar ao início
-      </Botao>
+      </Button>
     </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  linha: {
+  line: {
     alignItems: 'center',
     flexDirection: 'row',
     marginVertical: 10,
