@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
-import { Text, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 import Container from '../components/Container';
 import Button from '../components/Button';
+import AppText from '../components/AppText';
+
 import CoatOfArms from '../../assets/coat-of-arms-pocos-de-caldas.png';
 
 export default function HomeScreen() {
@@ -11,7 +13,7 @@ export default function HomeScreen() {
   return (
     <Container>
       <Image source={CoatOfArms} resizeMode="contain" style={styles.logo} />
-      <Text style={styles.title}>Poços Quiz</Text>
+      <AppText variant="title">Poços Quiz</AppText>
 
       <Button variant={'primary'} onPress={() => navigation.navigate('Quiz')}>
         Iniciar Quiz

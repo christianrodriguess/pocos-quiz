@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import AppText from '../components/AppText';
 
 import initialQuestions from '../data/questions.json';
 
@@ -87,25 +88,23 @@ export default function QuizScreen() {
 
   return (
     <Container>
-      <Text style={styles.question}>{shuffledQuestions[currentQuestionIndex].question}</Text>
+      <AppText style={styles.question}>{shuffledQuestions[currentQuestionIndex].question}</AppText>
 
       {isExplanationVisible ? (
         <Card style={{ alignItems: 'center' }}>
           {isAnswerCorrect ? (
-            <Text style={styles.explanationTitle}>✅ Você acertou!</Text>
+            <AppText style={styles.explanationTitle}>✅ Você acertou!</AppText>
           ) : (
             <>
-              <Text style={styles.explanationTitle}>❌ Você errou!</Text>
-              <Text style={styles.correctAnswer}>Resposta Correta:</Text>
-              <Text style={[styles.explanationText, { fontWeight: '600' }]}>
+              <AppText style={styles.explanationTitle}>❌ Você errou!</AppText>
+              <AppText style={styles.correctAnswer}>Resposta Correta:</AppText>
+              <AppText style={{ fontWeight: '600' }}>
                 {shuffledQuestions[currentQuestionIndex].answer}
-              </Text>
+              </AppText>
             </>
           )}
 
-          <Text style={styles.explanationText}>
-            {shuffledQuestions[currentQuestionIndex].explanation}
-          </Text>
+          <AppText>{shuffledQuestions[currentQuestionIndex].explanation}</AppText>
 
           <Button
             variant={'primary'}
@@ -127,9 +126,9 @@ export default function QuizScreen() {
         </>
       )}
 
-      <Text style={styles.caption}>
+      <AppText variant="caption">
         Pergunta {currentQuestionIndex + 1} de {shuffledQuestions.length}
-      </Text>
+      </AppText>
     </Container>
   );
 }
@@ -142,12 +141,6 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
 
-  caption: {
-    textAlign: 'center',
-    color: '#666',
-    fontSize: 12,
-  },
-
   explanationTitle: {
     textAlign: 'center',
     fontWeight: '600',
@@ -155,14 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
-  explanationText: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginBottom: 10,
-  },
-
   correctAnswer: {
-    fontSize: 16,
     fontWeight: '600',
     padding: 2,
     borderRadius: 5,

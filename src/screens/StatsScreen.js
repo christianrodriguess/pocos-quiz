@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Container from '../components/Container';
 import Card from '../components/Card';
-import Title from '../components/Title';
+import AppText from '../components/AppText';
+
+import { colors } from '../theme';
 
 export default function StatsScreen() {
   const [stats, setStats] = useState({
@@ -27,31 +29,33 @@ export default function StatsScreen() {
   }, []);
 
   const accuracyPercentage =
-    stats.totalQuestions > 0 ? ((stats.correctAnswersCount / stats.totalQuestions) * 100).toFixed(1) : 0;
+    stats.totalQuestions > 0
+      ? ((stats.correctAnswersCount / stats.totalQuestions) * 100).toFixed(1)
+      : 0;
 
   return (
     <Container>
-      <Title>Suas Estatísticas</Title>
+      <AppText variant="title">Suas Estatísticas</AppText>
 
       <Card>
         <View style={styles.line}>
-          <Ionicons name="help" size={24} color="#333" />
-          <Text style={styles.item}>Perguntas respondidas: {stats.totalQuestions}</Text>
+          <Ionicons name="help" size={24} color={colors.black} />
+          <AppText style={styles.item}>Perguntas respondidas: {stats.totalQuestions}</AppText>
         </View>
 
         <View style={styles.line}>
-          <Ionicons name="checkmark" size={24} color="#16C60C" />
-          <Text style={styles.item}>Acertos: {stats.correctAnswersCount}</Text>
+          <Ionicons name="checkmark" size={24} color={colors.success} />
+          <AppText style={styles.item}>Acertos: {stats.correctAnswersCount}</AppText>
         </View>
 
         <View style={styles.line}>
-          <Ionicons name="close" size={24} color="#B42B11" />
-          <Text style={styles.item}>Erros: {stats.wrongAnswersCount}</Text>
+          <Ionicons name="close" size={24} color={colors.error} />
+          <AppText style={styles.item}>Erros: {stats.wrongAnswersCount}</AppText>
         </View>
 
         <View style={styles.line}>
-          <Ionicons name="cellular" size={24} color="#0078D7" />
-          <Text style={styles.item}>Taxa de acertos: {accuracyPercentage}%</Text>
+          <Ionicons name="cellular" size={24} color={colors.neutral} />
+          <AppText style={styles.item}>Taxa de acertos: {accuracyPercentage}%</AppText>
         </View>
       </Card>
     </Container>
@@ -66,8 +70,6 @@ const styles = StyleSheet.create({
   },
 
   item: {
-    color: '#333',
-    fontSize: 18,
     marginBottom: 10,
   },
 });

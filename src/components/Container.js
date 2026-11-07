@@ -1,6 +1,8 @@
 import { View, StyleSheet } from 'react-native';
 
-export default function Container({ children, style }) {
+import { colors } from '../theme';
+
+export default function Container({ style, children }) {
   return <View style={[styles.container, style]}>{children}</View>;
 }
 
@@ -8,7 +10,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FAFAF9',
+    backgroundColor: colors.backgroundColor,
     flex: 1,
     padding: 20,
   },

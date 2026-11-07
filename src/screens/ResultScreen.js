@@ -1,11 +1,13 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Card from '../components/Card';
-import Title from '../components/Title';
+import AppText from '../components/AppText';
+
+import { colors } from '../theme';
 
 export default function ResultScreen() {
   const navigation = useNavigation();
@@ -17,22 +19,22 @@ export default function ResultScreen() {
 
   return (
     <Container>
-      <Title>Quiz Finalizado!</Title>
+      <AppText variant="title">Quiz Finalizado!</AppText>
 
       <Card>
         <View style={styles.line}>
-          <Ionicons name="checkmark" size={24} color="#16C60C" />
-          <Text style={styles.item}>Acertos: {correctAnswersCount}</Text>
+          <Ionicons name="checkmark" size={24} color={colors.success} />
+          <AppText style={styles.item}>Acertos: {correctAnswersCount}</AppText>
         </View>
 
         <View style={styles.line}>
-          <Ionicons name="close" size={24} color="#B42B11" />
-          <Text style={styles.item}>Erros: {wrongAnswersCount}</Text>
+          <Ionicons name="close" size={24} color={colors.error} />
+          <AppText style={styles.item}>Erros: {wrongAnswersCount}</AppText>
         </View>
 
         <View style={styles.line}>
-          <Ionicons name="cellular" size={24} color="#0078D7" />
-          <Text style={styles.item}>Taxa de acertos: {accuracyPercentage}%</Text>
+          <Ionicons name="cellular" size={24} color={colors.neutral} />
+          <AppText style={styles.item}>Taxa de acertos: {accuracyPercentage}%</AppText>
         </View>
       </Card>
 

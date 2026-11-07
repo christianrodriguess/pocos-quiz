@@ -2,19 +2,19 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { colors } from '../theme';
 
 const buttonVariants = {
-  primary: { backgroundColor: colors.green, text: colors.white },
-  secondary: { backgroundColor: colors.gray, text: colors.black },
+  primary: { backgroundColor: colors.primary, textColor: colors.white },
+  secondary: { backgroundColor: colors.secondary, textColor: colors.text },
 };
 
-export default function Button({ children, variant = 'primary', onPress, style }) {
-  const { backgroundColor, text: textColor } = buttonVariants[variant];
+export default function Button({ variant = 'primary', style, onPress, children }) {
+  const { backgroundColor, textColor } = buttonVariants[variant];
 
   return (
     <TouchableOpacity
       style={[styles.button, { backgroundColor: backgroundColor }, style]}
       onPress={onPress}
     >
-      <Text style={[styles.text, { color: textColor }]}>{children}</Text>
+      <Text style={[styles.buttonText, { color: textColor }]}>{children}</Text>
     </TouchableOpacity>
   );
 }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 
-  text: {
+  buttonText: {
     textAlign: 'center',
     fontWeight: '600',
     fontSize: 16,
