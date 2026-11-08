@@ -38,11 +38,11 @@ export default function ResultScreen() {
         </View>
       </Card>
 
-      <Button variant={'primary'} onPress={() => navigation.navigate('Quiz')}>
+      <Button variant={'primary'} onPress={() => navigation.replace('Quiz')}>
         Jogar novamente
       </Button>
 
-      <Button variant={'secondary'} onPress={() => navigation.navigate('Inicio')}>
+      <Button variant={'secondary'} onPress={() => navigation.popTo('Home')}>
         Voltar ao início
       </Button>
     </Container>

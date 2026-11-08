@@ -18,10 +18,10 @@ export default function HomeScreen() {
       <Button variant={'primary'} onPress={() => navigation.navigate('Quiz')}>
         Iniciar Quiz
       </Button>
-      <Button variant={'secondary'} onPress={() => navigation.navigate('Estatisticas')}>
+      <Button variant={'secondary'} onPress={() => navigation.navigate('Stats')}>
         Estatísticas
       </Button>
-      <Button variant={'secondary'} onPress={() => navigation.navigate('Sobre')}>
+      <Button variant={'secondary'} onPress={() => navigation.navigate('About')}>
         Sobre
       </Button>
     </Container>

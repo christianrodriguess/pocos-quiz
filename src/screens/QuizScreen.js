@@ -72,7 +72,7 @@ export default function QuizScreen() {
     if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      navigation.navigate('Resultado', {
+      navigation.replace('Result', {
         totalQuestions: shuffledQuestions.length,
         correctAnswersCount,
         wrongAnswersCount,

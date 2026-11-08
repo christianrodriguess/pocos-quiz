@@ -13,11 +13,15 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Inicio" options={{ headerShown: false }} component={HomeScreen} />
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false, title: 'Início' }}
+        />
         <Stack.Screen name="Quiz" component={QuizScreen} />
-        <Stack.Screen name="Estatisticas" component={StatsScreen} />
-        <Stack.Screen name="Resultado" component={ResultScreen} />
-        <Stack.Screen name="Sobre" component={AboutScreen} />
+        <Stack.Screen name="Stats" component={StatsScreen} options={{ title: 'Estatísticas' }} />
+        <Stack.Screen name="Result" component={ResultScreen} options={{ title: 'Resultado', headerLeft: () => null, gestureEnabled: false }} />
+        <Stack.Screen name="About" component={AboutScreen} options={{ title: 'Sobre' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
