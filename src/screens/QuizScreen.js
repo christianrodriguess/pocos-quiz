@@ -36,6 +36,8 @@ export default function QuizScreen() {
   const [isExplanationVisible, setExplanationVisible] = useState(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
+  const current = shuffledQuestions[currentQuestionIndex];
+
   const saveStats = async (isCorrect) => {
     try {
       const savedStats = await AsyncStorage.getItem('stats');
@@ -54,7 +56,7 @@ export default function QuizScreen() {
   };
 
   const checkAnswer = (option) => {
-    const isCorrect = shuffledQuestions[currentQuestionIndex].answer === option;
+    const isCorrect = current.answerId === option.id;
 
     setIsAnswerCorrect(isCorrect);
     setExplanationVisible(true);
@@ -88,7 +90,7 @@ export default function QuizScreen() {
 
   return (
     <Container>
-      <AppText style={styles.question}>{shuffledQuestions[currentQuestionIndex].question}</AppText>
+      <AppText style={styles.question}>{current.question}</AppText>
 
       {isExplanationVisible ? (
         <Card style={{ alignItems: 'center' }}>
@@ -99,12 +101,12 @@ export default function QuizScreen() {
               <AppText style={styles.explanationTitle}>❌ Você errou!</AppText>
               <AppText style={styles.correctAnswer}>Resposta Correta:</AppText>
               <AppText style={{ fontWeight: '600' }}>
-                {shuffledQuestions[currentQuestionIndex].answer}
+                {current.options.find((o) => o.id === current.answerId).text}
               </AppText>
             </>
           )}
 
-          <AppText>{shuffledQuestions[currentQuestionIndex].explanation}</AppText>
+          <AppText>{current.explanation}</AppText>
 
           <Button
             variant={'primary'}
@@ -118,9 +120,9 @@ export default function QuizScreen() {
         </Card>
       ) : (
         <>
-          {shuffledQuestions[currentQuestionIndex].options.map((option) => (
-            <Button key={option} variant={'secondary'} onPress={() => checkAnswer(option)}>
-              {option}
+          {current.options.map((option) => (
+            <Button key={option.id} variant={'secondary'} onPress={() => checkAnswer(option)}>
+              {option.text}
             </Button>
           ))}
         </>
